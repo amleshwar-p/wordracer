@@ -23,8 +23,9 @@ const App = () => {
   // Fetch leaderboard data when the component mounts
   useEffect(() => {
     const fetchLeaderboard = async () => {
+      const backendUrl = process.env.VITE_BACKEND_URI;
       try {
-        const response = await axios.get('http://localhost:5000/api/leaderboard');
+        const response = await axios.get(`${backendUrl}/api/leaderboard`);
         setLeaderboard(response.data);
       } catch (error) {
         console.error("Error fetching leaderboard:", error);
