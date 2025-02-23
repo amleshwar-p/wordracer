@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5000; // You can keep this for local testing
 
 // Middleware
 app.use(express.json());
@@ -44,16 +44,11 @@ app.get('/api/leaderboard', async (req, res) => {
 // API to save a new score
 app.post('/api/leaderboard', async (req, res) => {
     const { name, score } = req.body;
-
     if (!name || !score) {
         return res.status(400).json({ msg: 'Please provide both name and score' });
     }
-
     try {
-        const newScore = new Leaderboard({
-            name,
-            score,
-        });
+        const newScore = new Leaderboard({ name, score });
         await newScore.save();
         res.status(201).json(newScore);
     } catch (err) {
@@ -62,7 +57,12 @@ app.post('/api/leaderboard', async (req, res) => {
     }
 });
 
-// Start the server
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-});
+// For local development, you can conditionally start the server.
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(port, () => {
+        console.log(`Server is running on port ${port}`);
+    });
+}
+
+// Export the app for Vercel
+export default app;
