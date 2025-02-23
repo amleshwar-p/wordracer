@@ -8,8 +8,8 @@
     ],
     "routes": [
         {
-            "source": "/api/(.*)",
-            "destination": "/api/index.cjs"
+            "src": "/api/(.*)",
+            "dest": "/api/index.cjs"
         }
     ]
 }
