@@ -1,36 +1,32 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import dotenv from 'dotenv';
-
-// Load environment variables
-dotenv.config();
+// api/index.cjs
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 5000; // You can keep this for local testing
+const port = process.env.PORT || 5000;
 
-// Middleware
 app.use(express.json());
 app.use(cors());
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
+// MongoDB connection (you can leave as is)
+mongoose
+    .connect(process.env.MONGODB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
     .then(() => console.log('MongoDB connected'))
     .catch((err) => console.error('MongoDB connection error:', err));
 
-// Define a schema for the leaderboard
+// Leaderboard schema and model
 const leaderboardSchema = new mongoose.Schema({
     name: { type: String, required: true },
     score: { type: Number, required: true },
 });
-
-// Define a model for the leaderboard
 const Leaderboard = mongoose.model('Leaderboard', leaderboardSchema);
 
-// API to get the leaderboard
+// GET leaderboard endpoint
 app.get('/api/leaderboard', async (req, res) => {
     try {
         const scores = await Leaderboard.find().sort({ score: -1 }).limit(10);
@@ -41,7 +37,7 @@ app.get('/api/leaderboard', async (req, res) => {
     }
 });
 
-// API to save a new score
+// POST to save score endpoint
 app.post('/api/leaderboard', async (req, res) => {
     const { name, score } = req.body;
     if (!name || !score) {
@@ -57,12 +53,10 @@ app.post('/api/leaderboard', async (req, res) => {
     }
 });
 
-// For local development, you can conditionally start the server.
+// For local testing only:
 if (process.env.NODE_ENV !== 'production') {
-    app.listen(port, () => {
-        console.log(`Server is running on port ${port}`);
-    });
+    app.listen(port, () => console.log(`Server running on port ${port}`));
 }
 
 // Export the app for Vercel
-export default app;
+module.exports = app;
