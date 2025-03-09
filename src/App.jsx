@@ -38,6 +38,7 @@ const App = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(setUser);
     return unsubscribe;
+    
   }, []);
 
   // Update WPM and save score when input matches sentence
