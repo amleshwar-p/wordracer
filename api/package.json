@@ -2,11 +2,6 @@
   "name": "api",
   "version": "1.0.0",
   "main": "index.js",
-<<<<<<< HEAD
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-=======
   "dependencies": {
     "accepts": "^1.3.8",
     "array-flatten": "^1.1.1",
@@ -97,21 +92,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "vercel-build": "npm install"
->>>>>>> d474dda (Database fixed)
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
-<<<<<<< HEAD
-  "description": "",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "mongoose": "^8.10.1"
-  }
-=======
   "description": ""
->>>>>>> d474dda (Database fixed)
 }
