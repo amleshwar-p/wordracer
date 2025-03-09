@@ -1,7 +1,7 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.cjs",
   "dependencies": {
     "accepts": "^1.3.8",
     "array-flatten": "^1.1.1",
