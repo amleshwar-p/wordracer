@@ -38,7 +38,7 @@ const App = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(setUser);
     return unsubscribe;
-    
+
   }, []);
 
   // Update WPM and save score when input matches sentence
@@ -98,10 +98,10 @@ const App = () => {
 
       try {
         // Send POST request to save the score
-        await axios.post('http://localhost:5000/api/leaderboard', newScore);
+        await axios.post('https://wordracer-back.vercel.app/api/leaderboard', newScore);
 
         // After saving, fetch the updated leaderboard
-        const response = await axios.get('http://localhost:5000/api/leaderboard');
+        const response = await axios.get('https://wordracer-back.vercel.app/api/leaderboard');
         setLeaderboard(response.data);
       } catch (error) {
         console.error("Error saving score:", error);
