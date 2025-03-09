@@ -23,7 +23,7 @@ const App = () => {
   // Fetch leaderboard data when the component mounts
   useEffect(() => {
     const fetchLeaderboard = async () => {
-      const backendUrl = process.env.VITE_BACKEND_URI;
+      const backendUrl = import.meta.env.VITE_BACKEND_URI;
       try {
         const response = await axios.get(`${backendUrl}/api/leaderboard`);
         setLeaderboard(response.data);
